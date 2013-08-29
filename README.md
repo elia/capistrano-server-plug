@@ -18,7 +18,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+inside `config/deploy.rb`
+
+```ruby
+require 'capistrano/server/plug'
+```
+
+inside `config/deploy/<my-stage>.rb`
+
+```ruby
+set :server_type, :passenger
+```
+
+
 
 ## Contributing
 
