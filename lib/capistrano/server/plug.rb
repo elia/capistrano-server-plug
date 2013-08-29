@@ -1,9 +1,9 @@
-require "capistrano/server/plug/version"
+require 'capistrano/server/plug/version'
+require 'capistrano/server/plug/recipe'
 
 module Capistrano
   module Server
     module Plug
-      # Your code goes here...
     end
   end
 end
