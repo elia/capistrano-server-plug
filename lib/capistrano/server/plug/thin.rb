@@ -1,4 +1,4 @@
-Configuration.instance(true).load do
+Capistrano::Server::Plug.load do
   namespace :thin do
     set(:pid_path) { "#{current_path}/tmp/pids/server.pid" }
     set(:pid) { "$(cat #{pid_path})" }

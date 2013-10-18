@@ -1,4 +1,4 @@
-Configuration.instance(true).load do
+Capistrano::Server::Plug.load do
   namespace :torquebox do
     task :start do
       default_environment['JRUBY_OPTIONS'] = fetch(:jruby_options, nil)

@@ -1,11 +1,8 @@
-Configuration.instance(true).load do
+Capistrano::Server::Plug.load do
   namespace :nginx do
     desc "Setup application in nginx"
     task "setup", :role => :web do
-      config_file = "config/deploy/nginx_conf.erb"
-      unless File.exists?(config_file)
-        config_file = File.join(File.dirname(__FILE__), "../../generators/capistrano/nginx/templates/_nginx_conf.erb")
-      end
+      config_file = plug.templates['nginx_conf.erb']
       config = ERB.new(File.read(config_file)).result(binding)
       set :user, sudo_user
       conf_name = fetch(:nginx_conf_name, application)

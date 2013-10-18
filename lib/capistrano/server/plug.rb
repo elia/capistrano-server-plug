@@ -4,15 +4,19 @@ require 'capistrano'
 module Capistrano
   module Server
     module Plug
+      def self.load &block
+        Configuration.instance(true).load(&:block) if defined? Configuration
+      end
     end
   end
 end
 
-Configuration.instance(true).load do
-  set :get_server, &lambda do
+
+Capistrano::Server::Plug.load do
+  set :get_server, &lambda {
     require "capistrano/server/plug/#{server_type}"
     send(server_type)
-  end
+  }
 
   namespace :deploy do
     task(:start)   { get_server.start }

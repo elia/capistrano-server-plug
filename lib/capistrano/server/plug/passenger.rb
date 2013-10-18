@@ -1,4 +1,4 @@
-Configuration.instance(true).load do
+Capistrano::Server::Plug.load do
   namespace :passenger do
     task :start do
       #noop
