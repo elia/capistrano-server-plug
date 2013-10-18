@@ -2,7 +2,7 @@ Capistrano::Server::Plug.load do
   namespace :nginx do
     desc "Setup application in nginx"
     task "setup", :role => :web do
-      config_file = plug.templates['nginx_conf.erb']
+      config_file = Capistrano::Server::Plug.template_path(:nginx)
       config = ERB.new(File.read(config_file)).result(binding)
       set :user, sudo_user
       conf_name = fetch(:nginx_conf_name, application)

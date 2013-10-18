@@ -5,19 +5,14 @@ module Capistrano
       source_root File.expand_path('../templates', __FILE__)
 
       def copy_template
-        conf_name = CONFIGS[file_name]
-        if conf_name.nil?
-          raise ArgumentError, "unknown config: #{file_name.inspect} "+
-                               "(available configs are: #{CONFIGS.keys.join(', ')})"
-        end
-
         copy_file conf_name, "config/#{conf_name}"
       end
 
-      CONFIGS = {
-        'nginx' => 'nginx_conf.erb',
-        'uwsgi' => 'uwsgi_conf.ini.erb',
-      }
+      private
+
+      def conf_name
+        @conf_name ||= Plug.conf_name(file_name)
+      end
     end
   end
 end

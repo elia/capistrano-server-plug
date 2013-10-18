@@ -2,10 +2,7 @@ Capistrano::Server::Plug.load do
   namespace :uwsgi do
     desc 'Setup application in uwsgi'
     task :setup, :role => :web do
-      config_file = 'config/uwsgi.ini.erb'
-      unless File.exists?(config_file)
-        config_file = File.expand_path('../../../generators/capistrano/uwsgi/templates/_uwsgi_conf.ini.erb', __FILE__)
-      end
+      config_file = Capistrano::Server::Plug.template_path(:uwsgi)
       config = ERB.new(File.read(config_file)).result(binding)
       conf_name = fetch(:uwsgi_conf_name, "#{application}-#{stage}.ini")
 
